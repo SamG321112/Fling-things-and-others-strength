@@ -18,6 +18,7 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local FlingForceLabel = Instance.new("TextLabel")
 local InstructionLabel = Instance.new("TextLabel")
+local DiscordButton = Instance.new("TextLabel")
 
 ScreenGui.Name = "FlingControlGui"
 ScreenGui.ResetOnSpawn = false -- Ensure the GUI persists even after respawning
@@ -25,7 +26,7 @@ ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
 Frame.Name = "DisplayFrame"
 Frame.Position = UDim2.new(1, -250, 0, 10)
-Frame.Size = UDim2.new(0, 240, 0, 100)
+Frame.Size = UDim2.new(0, 240, 0, 140)
 Frame.BackgroundTransparency = 1
 Frame.Parent = ScreenGui
 
@@ -48,6 +49,16 @@ InstructionLabel.BackgroundTransparency = 1
 InstructionLabel.Font = Enum.Font.GothamBold
 InstructionLabel.TextSize = 14
 InstructionLabel.Parent = Frame
+
+DiscordButton.Name = "DiscordButton"
+DiscordButton.Size = UDim2.new(1, 0, 0.3, 0)
+DiscordButton.Position = UDim2.new(0, 0, 0.8, 0)
+DiscordButton.Text = "Join Discord: https://discord.gg/t6UgyY65"
+DiscordButton.TextColor3 = Color3.new(1, 1, 1)
+DiscordButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.9)
+DiscordButton.Font = Enum.Font.GothamBold
+DiscordButton.TextSize = 14
+DiscordButton.Parent = Frame
 
 -- Update fling force display
 local function updateFlingForceDisplay()
@@ -81,7 +92,7 @@ Workspace.ChildAdded:Connect(function(NewModel)
                 if not NewModel.Parent then
                     if UserInputService:GetLastInputType() == Enum.UserInputType.MouseButton2 then --//Launched
                         VelocityObject.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-                        VelocityObject.Velocity = Workspace.CurrentCamera.CFrame.lookVector * flingForce
+                        VelocityObject.Velocity = Workspace.CurrentCamera.CFrame.LookVector * flingForce
                         Debris:AddItem(VelocityObject, 1)
                     elseif UserInputService:GetLastInputType() == Enum.UserInputType.MouseButton1 then
                         VelocityObject:Destroy() --//Cancel Launch
@@ -109,4 +120,4 @@ end)
 -- Initial display update
 updateFlingForceDisplay()
 
-print("Adjustable throw strength script with GUI executed successfully!")
+print("Adjustable throw strength script with GUI and Discord link executed successfully!")
